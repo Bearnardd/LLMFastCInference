@@ -132,14 +132,6 @@ def train_vocab(vocab_size, cache_dir):
     print(f"Trained tokenizer is in {prefix}.model")
     print("Done.")
 
-def _check_path_exists(path):
-    if os.path.exists(path):
-        return True
-    if os.path.exists(os.path.join(os.getcwd(), path)):
-        return True
-    return False
-
-
 def process_shard(args, vocab_size, cache_dir):
     shard_id, shard = args
     # TODO: make it work with default tokenizer
@@ -155,13 +147,7 @@ def process_shard(args, vocab_size, cache_dir):
         all_tokens.extend(tokens)
     # convert to uint16 nparray
     all_tokens = np.array(all_tokens, dtype=np.uint16)
-    # calculate the output filename
-    # if vocab_size == 0:
-    #     # if we're using Llama 2, just save the tokenized file in the same dir
-    #     tokenized_filename = shard.replace(".json", ".bin")
-    # else:
-        # save .bin files into a new tok{N} directory
-    # bin_dir = os.path.join(cache_dir, f"tok{vocab_size}")
+
     pretokenized_data_target_dir = os.path.join(cache_dir, f"pretokenized_data/tok{vocab_size}")
     shard_basename = os.path.basename(shard)
     bin_basename = shard_basename.replace(".json", ".bin")
@@ -205,12 +191,6 @@ def process_args(args):
                     processed_args[step] = arg 
                 else:
                     processed_args[step] = None
-        # elif arg == "data_cache_dir":
-        #     if not _check_path_exists(args_dict[arg]):
-        #         raise ValueError(
-        #             f"Path {args_dict[arg]} does not exist. Please check the path."
-        #         )
-            # processed_args[arg] = args_dict[arg]
         else:
             processed_args[arg] = args_dict[arg]
     return processed_args
