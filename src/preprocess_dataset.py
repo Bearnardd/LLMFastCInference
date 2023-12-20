@@ -132,6 +132,9 @@ def train_vocab(vocab_size, cache_dir):
     print(f"Trained tokenizer is in {prefix}.model")
     print("Done.")
 
+
+
+
 def process_shard(args, vocab_size, cache_dir):
     shard_id, shard = args
     # TODO: make it work with default tokenizer

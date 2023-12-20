@@ -1,3 +1,4 @@
+# train_config
 output_dir : "out"
 eval_interval : 2000
 log_interval : 1
@@ -17,7 +18,6 @@ n_heads : 6
 n_kv_heads : 6
 multiple_of : 32
 dropout : 0.0
-# adamw optimizer
 gradient_accumulation_steps : 4  # used to simulate larger batch sizes
 learning_rate : 5e-4  # max learning rate
 max_iters : 100000  # total number of training iterations
@@ -27,7 +27,6 @@ beta2 : 0.95
 grad_clip : 1.0  # clip gradients at this value, or disable if == 0.0
 lr_decay_iter: 10000
 min_lr: 0.0 
-# learning rate decay settings
 decay_lr : True  # whether to decay the learning rate
 warmup_iters : 1000  # how many steps to warm up for
 # system

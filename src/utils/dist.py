@@ -15,4 +15,4 @@ def init_ddp(cfg):
     # world_size number of processes will be training simultaneously, so we can scale
     # down the desired gradient accumulation iterations per process proportionally
     cfg.gradient_accumulation_steps //= ddp_world_size
-    return ddp_rank, ddp_local_rank, ddp_world_size, device
+    return ddp_rank, ddp_local_rank, ddp_world_size
